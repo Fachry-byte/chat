@@ -1,0 +1,27 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fachry-Byte/chat.git"
+  },
+  "author": "Fachry Azriel Fadjwani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fachry-Byte/chat/issues"
+  },
+  "homepage": "https://github.com/Fachry-Byte/chat#readme",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "csurf": "^1.11.0",
+    "socket.io": "^2.3.0"
+  }
+}
