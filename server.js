@@ -1,6 +1,6 @@
 const http = require('http');
 const express = require('express');
-const helmet = require('helmet')
+const helmet = require('helmet');
 const socket = require('socket.io');
 const { resolve } = require('path');
 
@@ -9,11 +9,16 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', resolve('./frontend/views'));
-app.use(helmet())
-app.use(helmet.noCache())
-app.use(helmet.referrerPolicy())
+app.use(express.static(resolve('./frontend/static')));
+app.use(helmet());
+app.use(helmet.noCache());
+app.use(helmet.referrerPolicy());
 
 const server = http.createServer(app);
 const io = socket(server);
+
+app.get('/', (req, res) => {
+    res.render('index')
+})
 
 server.listen(port, _ => console.log(`Listening on port ${port}`));
