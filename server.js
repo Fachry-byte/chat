@@ -1,18 +1,15 @@
 const http = require('http');
 const express = require('express');
-const SocketIO = require('socket.io');
-const ejsLayouts = require('express-ejs-layouts');
+const socket = require('socket.io');
 const { resolve } = require('path');
 
-const PORT = process.env.PORT || 5000;
-
+const port = process.env.PORT || 5000;
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', resolve('./frontend/views'));
-app.use(ejsLayouts);
 
 const server = http.createServer(app);
-const io = SocketIO(server);
+const io = socket(server);
 
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+server.listen(port, _ => console.log(`Listening on port ${port}`));
