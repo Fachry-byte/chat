@@ -16,6 +16,8 @@ const port = process.env.PORT || 5000;
 const secret = process.env.KUNCI;
 const app = express();
 
+const { Auth } = require(resolve('./backend/routes'));
+
 // session store tak hapus dulu
 
 app.set('view engine', 'ejs');
@@ -48,7 +50,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_m'))
 
-app.use('/', require(resolve('./backend/routes/router')));
+// app.use('/', (req,res) => res.render('index'));
+// app.use('/auth', Auth);
+
+app.use('/', Auth);
 
 const server = http.createServer(app);
 const io = socket(server);
