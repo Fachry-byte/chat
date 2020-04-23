@@ -105,3 +105,6 @@ dist
 
 # Database File
 *.db
+
+#VSCODE User Setting
+.vscode/
