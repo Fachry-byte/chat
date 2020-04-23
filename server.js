@@ -12,9 +12,6 @@ const flash = require('express-flash');
 
 require('dotenv').config();
 
-const { SessionData } = require('./backend/db');
-const { Auth } = require(resolve('./backend/routes'));
-
 const port = process.env.PORT || 5000;
 const secret = process.env.KUNCI;
 const app = express();
@@ -24,10 +21,10 @@ app.set('views', resolve('./frontend/views'));
 
 const sess = {
     secret,
+    name: 'Session ID',
     cookie: { httpOnly: true },
     resave: false,
     saveUninitialized: false,
-    store: new SessionStore({ filename: SessionData })
 }
 
 if (app.get('env') === 'production') {
@@ -40,13 +37,11 @@ app.use(express.static(resolve('./frontend/static')));
 app.use(helmet());
 app.use(noCache());
 app.use(helmet.referrerPolicy({ policy: ['no-referrer', 'same-origin'] }));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookie(secret));
 app.use(session(sess));
 
-app.get('/', (req, res) => res.render('index'));
-
-app.get('/login', (req, res) => res.render('login'));
+app.use('/', require(resolve('./backend/routes/route')));
 
 const server = http.createServer(app);
 const io = socket(server);
