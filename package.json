@@ -18,16 +18,19 @@
   },
   "homepage": "https://github.com/Fachry-Byte/chat#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "csurf": "^1.11.0",
+    "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.1",
+    "helmet": "^3.22.0",
+    "method-override": "^3.0.0",
+    "nedb": "^1.8.0",
+    "nedb-session-store": "^1.1.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "express-session": "^1.17.1",
-    "express-flash": "^0.0.2",
-    "bcryptjs": "^2.4.3",
-    "method-override": "^3.0.0",
-    "helmet": "^3.22.0",
-    "csurf": "^1.11.0",
     "socket.io": "^2.3.0"
   }
 }
