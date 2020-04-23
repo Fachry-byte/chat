@@ -1,14 +1,10 @@
 const Datastore = require('nedb');
-const { join } = require('path');
+const SessionStore = require('nedb-session-store');
 
-const mainPath = join(__dirname, 'db');
+const { makeDBName } = require('../utils/path');
 
-const data = filename => {
-	const str = filename + '.db';
-	return join(mainPath, str)
-}
+const Auth = new Datastore({ filename: makeDBName('Auth'), autoload: true });
+const Message = new Datastore({ filename: makeDBName('Message'), autoload: true });
+const SessionData = new SessionStore({ filename: makeDBName('SessionData') });
 
-const Auth = new Datastore({ filename: data('Auth'), autoload: true });
-const Message = new Datastore({ filename: data('Message'), autoload: true });
-
-module.exports = { Auth, Message }
+module.exports = { Auth, Message, SessionData }
