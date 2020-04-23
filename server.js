@@ -2,19 +2,21 @@ const http = require('http');
 const express = require('express');
 const helmet = require('helmet');
 const socket = require('socket.io');
-const passport = require('passport');
-const methodOverride = require('method-override')
+const flash = require('express-flash');
+const passport = require('passport')
+const methodOverride = require('method-override');
 const { resolve } = require('path');
 const noCache = require('nocache');
 const session = require('express-session');
 const cookie = require('cookie-parser');
-const flash = require('express-flash');
 
 require('dotenv').config();
 
 const port = process.env.PORT || 5000;
 const secret = process.env.KUNCI;
 const app = express();
+
+// session store tak hapus dulu
 
 app.set('view engine', 'ejs');
 app.set('views', resolve('./frontend/views'));
@@ -38,10 +40,15 @@ app.use(helmet());
 app.use(noCache());
 app.use(helmet.referrerPolicy({ policy: ['no-referrer', 'same-origin'] }));
 app.use(express.urlencoded({ extended: false }));
-app.use(cookie(secret));
+app.use(express.json());
+app.use(cookie(secret))
 app.use(session(sess));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride('_m'))
 
-app.use('/', require(resolve('./backend/routes/route')));
+app.use('/', require(resolve('./backend/routes/router')));
 
 const server = http.createServer(app);
 const io = socket(server);
