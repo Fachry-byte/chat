@@ -6,11 +6,13 @@
     <title>Daftar</title>
 </head>
 <body>
-    <form action="/daftar" method="post">
-        <input type="text" name="nama">
+	
+    <form action="<%= baseUrl %>/daftar" method="post">
+        <input type="email" name="email">
         <input type="password" name="pwi">
+		<input type="text" name="nama">
         <input type="submit" value="Submit">
     </form>
-    <a href="/masuk">Masuk</a>
+    <a href="<%= baseUrl %>/masuk">Masuk</a>
 </body>
 </html>

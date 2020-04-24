@@ -9,11 +9,11 @@
     <% if (messages.error) { %>
         <%= messages.error %>
     <% } %>
-    <form action="/masuk" method="post">
-        <input type="text" name="nama">
+    <form action="<%= baseUrl %>/masuk" method="post">
+        <input type="email" name="email">
         <input type="password" name="pw">
         <input type="submit" value="Submit">
     </form>
-    <a href="/daftar">Daftar</a>
+    <a href="<%= baseUrl %>/daftar">Daftar</a>
 </body>
 </html>
