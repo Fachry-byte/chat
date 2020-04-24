@@ -3,7 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const socket = require('socket.io');
 const flash = require('express-flash');
-const passport = require('passport')
+const passport = require('passport');
 const methodOverride = require('method-override');
 const { resolve } = require('path');
 const noCache = require('nocache');
@@ -16,9 +16,9 @@ const port = process.env.PORT || 5000;
 const secret = process.env.KUNCI;
 const app = express();
 
-const { Auth } = require(resolve('./backend/routes'));
-
-// session store tak hapus dulu
+const { checkAuth } = require('./backend/utils/passport-api');
+const { SessionData } = require('./backend/data');
+const { Auth,Message } = require(resolve('./backend/routes'));
 
 app.set('view engine', 'ejs');
 app.set('views', resolve('./frontend/views'));
@@ -29,6 +29,7 @@ const sess = {
     cookie: { httpOnly: true },
     resave: false,
     saveUninitialized: false,
+	store: SessionData(session)
 }
 
 if (app.get('env') === 'production') {
@@ -48,12 +49,14 @@ app.use(session(sess));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(methodOverride('_m'))
+app.use(methodOverride('_m'));
 
 // app.use('/', (req,res) => res.render('index'));
 // app.use('/auth', Auth);
 
-app.use('/', Auth);
+app.get('/', (req,res) => res.render('index'));
+app.use('/auth', Auth);
+app.use('/message', checkAuth, Message);
 
 const server = http.createServer(app);
 const io = socket(server);
