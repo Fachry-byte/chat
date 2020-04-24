@@ -4,18 +4,16 @@ const bcrypt = require('bcryptjs');
 const checkAuth = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/auth/masuk');
 const checknotAuth = (req, res, next) => req.isAuthenticated() ? res.redirect('/message') : next();
 
-const { Auth: db } = require('../data');
-
-function init(passport) {
+function init(passport, db) {
 	passport.use(new LocalStrategy({
-		usernameField: 'email',
+		usernameField: 'nama',
 		passwordField: 'pw',
-	}, async (email, pw, done) => {
-		const pengguna = await db.findOne({ email });
+	}, async (nama, pw, done) => {
+		const pengguna = await db.findOne({ nama });
 		if (pengguna == null) 
-			return done(null, false, { message: 'Email anda tidak terdaftar' });
+			return done(null, false, { message: 'Nama anda tidak terdaftar' });
 		try {
-			return await bcrypt.compare(pw, pengguna.password) ? done(null, pengguna) : done(null, false, { message: 'Password/Email salah' });
+			return await bcrypt.compare(pw, pengguna.password) ? done(null, pengguna) : done(null, false, { message: 'Password/Nama salah' });
 		} catch (e) {
 			return done(e);
 		}
