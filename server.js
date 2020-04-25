@@ -59,9 +59,9 @@ const io = socket(server);
 
 app.use((req, res, next) => next(createError(404)));
 app.use((err, req, res, next) => {
-    res.locals.err = err
-    res.status(err.status)
-    res.render('error')
+    res.locals.err = err;
+    res.status(err.status);
+    res.render('error');
 });
 
 server.listen(port, _ => console.log(`Listening on port ${port}`));
