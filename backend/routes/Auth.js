@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const { init, checknotAuth } = require('../utils/passport-api');
 const { Auth: db } = require('../data');
 
+router.use(express.static('./frontend/static'));
 init(passport, db);
 
 router.get('/', (req, res) => res.redirect(req.baseUrl + '/masuk'));

@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar</title>
 </head>
+
 <body>
     <p><%= respon %></p>
     <form action="<%= baseUrl %>/daftar" method="post">
-        <input type="text" name="nama">
-        <input type="password" name="pw">
-        <input type="submit" value="Submit">
+        <input type="text" name="nama"><br>
+        <input type="password" name="pw"><button type="button" id="captcha" data-captcha="7"></button><br>
+        <button type="submit">Submit</button>
     </form>
     <a href="<%= baseUrl %>/masuk">Masuk</a>
+    <script src="./js/captcha.js"></script>
 </body>
+
 </html>
