@@ -8,10 +8,11 @@
 </head>
 
 <body>
-    <p><%= respon %></p>
-    <form action="<%= baseUrl %>/daftar" method="post">
+    <p id="captcha-res"><%= respon %></p>
+    <form action="<%= baseUrl %>/daftar" method="post" id="form-c">
         <input type="text" name="nama"><br>
-        <input type="password" name="pw"><button type="button" id="captcha" data-captcha="7"></button><br>
+        <input type="password" name="pw"><br>
+        <input type="text" id="captcha-input"><button type="button" id="captcha" data-captcha="3"></button><br>
         <button type="submit">Submit</button>
     </form>
     <a href="<%= baseUrl %>/masuk">Masuk</a>
