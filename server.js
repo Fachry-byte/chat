@@ -38,6 +38,8 @@ if (app.get('env') === 'production') {
     sess.cookie.secure = true;
 }
 
+app.use('/', express.static('./frontend/static'));
+
 app.use(helmet());
 app.use(noCache());
 app.use(helmet.referrerPolicy({ policy: ['no-referrer', 'same-origin'] }));
