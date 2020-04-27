@@ -38,6 +38,8 @@ if (app.get('env') === 'production') {
     sess.cookie.secure = true;
 }
 
+app.use('/', express.static('./frontend/static'));
+
 app.use(helmet());
 app.use(noCache());
 app.use(helmet.referrerPolicy({ policy: ['no-referrer', 'same-origin'] }));
@@ -59,9 +61,9 @@ const io = socket(server);
 
 app.use((req, res, next) => next(createError(404)));
 app.use((err, req, res, next) => {
-    res.locals.err = err
-    res.status(err.status)
-    res.render('error')
+    res.locals.err = err;
+    res.status(err.status);
+    res.render('error');
 });
 
 server.listen(port, _ => console.log(`Listening on port ${port}`));
