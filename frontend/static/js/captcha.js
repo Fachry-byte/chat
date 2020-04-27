@@ -4,10 +4,11 @@ function main() {
     discopypaste(el);
     btn.onclick = _ => {
         if (inp.value != c || inp.value == '') {
-            sendform(form, false);
+            sendform(form, 0);
+            setTimeout(_ => res.innerHTML = '', 1000);
             return res.innerHTML = 'Salah';
         }
-        return sendform(form, true);
+        return sendform(form, 1);
     }
 }
 
@@ -20,7 +21,7 @@ function captcha(el, len) {
 }
 
 function sendform(element, submit) {
-    return submit == true ? element.onsubmit = true : element.onsubmit = false
+    return submit == true ? element.onsubmit = _ => true : element.onsubmit = _ => false
 }
 
 function discopypaste(el) {
