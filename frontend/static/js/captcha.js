@@ -3,7 +3,7 @@ function main() {
     const c = captcha(el, len), btn = document.querySelector('[type="submit"]'), form = document.getElementById('form-c'), res = document.getElementById('captcha-res')
     discopypaste(el);
     btn.onclick = _ => {
-        if(inp.value != c || inp.value == '') {
+        if (inp.value != c || inp.value == '') {
             sendform(form, false);
             return res.innerHTML = 'Salah';
         }
@@ -20,11 +20,11 @@ function captcha(el, len) {
 }
 
 function sendform(element, submit) {
-    return submit == true ? element.onsubmit = () => { return true } : element.onsubmit = () => { return false }
+    return submit == true ? element.onsubmit = true : element.onsubmit = false
 }
-  
+
 function discopypaste(el) {
-    el.oncontextmenu = () => false;
+    el.oncontextmenu = false;
     return false;
 }
 
