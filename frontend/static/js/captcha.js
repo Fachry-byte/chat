@@ -6,7 +6,7 @@ function main() {
         if (inp.value != c || inp.value == '') {
             sendform(form, 0);
             setTimeout(_ => res.innerHTML = '', 1000);
-            return res.innerHTML = 'Salah';
+            return res.value = 'Salah';
         }
         return sendform(form, 1);
     }
@@ -16,7 +16,7 @@ function captcha(el, len) {
     const dat = '01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(''), res = [];
     const rand = n => Math.floor(Math.random() * n);
     for (let i = 1; i <= len; i++) res.push(dat[rand(dat.length)]);
-    el.innerHTML = res.join('');
+    el.value = res.join('');
     return res.join('');
 }
 

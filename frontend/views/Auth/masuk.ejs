@@ -9,11 +9,14 @@
     <% if (messages.error) { %>
         <%= messages.error %>
     <% } %>
-    <form action="<%= baseUrl %>/masuk" method="post">
-        <input type="text" name="nama" required>
-        <input type="password" name="pw" required>
-        <input type="submit" value="Submit" required>
+    <p id="captcha-res"></p>
+    <form action="<%= baseUrl %>/masuk" method="post" id="form-c">
+        <input type="text" name="nama" required><br>
+        <input type="password" name="pw" required><br>
+        <input type="text" id="captcha-input" required><input type="button" id="captcha" data-captcha="10"><br>
+        <input type="submit" value="Submit">
     </form>
     <a href="<%= baseUrl %>/daftar">Daftar</a>
+    <script src="/js/captcha.js"></script>
 </body>
 </html>

@@ -12,8 +12,8 @@
     <form action="<%= baseUrl %>/daftar" method="post" id="form-c">
         <input type="text" name="nama" required><br>
         <input type="password" name="pw" required><br>
-        <input type="text" id="captcha-input" required><button type="button" id="captcha" data-captcha="3"></button><br>
-        <button type="submit">Submit</button>
+        <input type="text" id="captcha-input" required><input type="button" id="captcha" data-captcha="10"><br>
+        <input type="submit" value="Submit">
     </form>
     <a href="<%= baseUrl %>/masuk">Masuk</a>
     <script src="/js/captcha.js"></script>
