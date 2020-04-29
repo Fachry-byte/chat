@@ -6,17 +6,16 @@
     <title>Masuk</title>
 </head>
 <body>
+    <form action="<%= baseUrl %>/masuk" method="post">
+        <input type="text" name="nama" required><br>
+        <input type="password" name="pw" required><br>
+        <input type="text" name="captcha" required><input type="button" value="<%= captcha %> "><br>
+        <input type="submit" value="Submit">
+    </form>
     <% if (messages.error) { %>
         <%= messages.error %>
     <% } %>
-    <p id="captcha-res"></p>
-    <form action="<%= baseUrl %>/masuk" method="post" id="form-c">
-        <input type="text" name="nama" required><br>
-        <input type="password" name="pw" required><br>
-        <input type="text" id="captcha-input" required><input type="button" id="captcha" data-captcha="10"><br>
-        <input type="submit" value="Submit">
-    </form>
+    <p><%= respon %> </p>
     <a href="<%= baseUrl %>/daftar">Daftar</a>
-    <script src="/js/captcha.js"></script>
 </body>
 </html>

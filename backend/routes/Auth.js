@@ -12,11 +12,11 @@ init(passport, db);
 
 router.get('/', (req, res) => res.redirect(req.baseUrl + '/masuk'));
 
-router.get('/daftar', checknotAuth, (req, res) => res.render('Auth/daftar', { baseUrl: req.baseUrl, respon: req.flash('respon'), captcha: captcha.generate() }));
+router.get('/daftar', checknotAuth, (req, res) => res.render('Auth/daftar', { baseUrl: req.baseUrl, captcha: captcha.generate(), respon: req.flash('respon') }));
 
-router.get('/masuk', checknotAuth, (req, res) => res.render('Auth/masuk', { baseUrl: req.baseUrl }));
+router.get('/masuk', checknotAuth, (req, res) => res.render('Auth/masuk', { baseUrl: req.baseUrl, captcha: captcha.generate(), respon: req.flash('respon') }));
 
-router.post('/masuk', checknotAuth, passport.authenticate('local', {
+router.post('/masuk', checknotAuth, checkCaptcha, passport.authenticate('local', {
 	successRedirect: '/message',
 	failureRedirect: '/auth/masuk',
 	failureFlash: true
