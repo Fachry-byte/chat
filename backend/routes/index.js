@@ -1,4 +1,4 @@
-const Auth = require('./Auth');
-const Message = require('./Message');
+const Auth = require("./Auth");
+const Message = require("./Message");
 
-module.exports = { Auth, Message }
+module.exports = { Auth, Message };

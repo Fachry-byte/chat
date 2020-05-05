@@ -1,4 +1,7 @@
 let FIELD = 'Capctha', CAPTCHA = null;
+const dat = '01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(''),
+      rand = n => Math.floor(Math.random() * n);
+
 
 class Captcha {
     constructor({ len = 3, field = FIELD }) {
@@ -8,8 +11,7 @@ class Captcha {
         FIELD = this.field;
     }
     generate() {
-        const dat = '01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(''), res = [];
-        const rand = n => Math.floor(Math.random() * n);
+        const res = [];
         for (let i = 1; i <= this.length; i++) res.push(dat[rand(dat.length)]);
         CAPTCHA = res.join('')
         return this.code = res.join('');
