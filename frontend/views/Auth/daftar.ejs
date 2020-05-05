@@ -15,8 +15,10 @@
             <input type="password" name="pw" required><br>
             <input type="text" name="captcha" required><input type="button" value="<%= captcha %>"><br>
             <input type="submit" value="Submit">
-            <p><%= respon %></p>
         </form>
+        <% if (respon  != '') { %>
+            <p><%= respon %></p>
+        <% } %>
         <a href="<%= baseUrl %>/masuk">Masuk</a>
     </div>
 </body>

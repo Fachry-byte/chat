@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/form.css">
     <title>Masuk</title>
 </head>
 <body>
     <form action="<%= baseUrl %>/masuk" method="post">
-        <input type="text" name="nama" required><br>
-        <input type="password" name="pw" required><br>
-        <input type="text" name="captcha" required><input type="button" value="<%= captcha %> "><br>
+        <input type="text" name="nama" placeholder="Nama.." required><br>
+        <input type="password" name="pw" placeholder="Password.." required><br>
+        <input type="text" name="captcha" placeholder="Captcha.." required><input type="button" value="<%= captcha %>"><br>
         <input type="submit" value="Submit">
     </form>
     <% if (messages.error) { %>
-        <%= messages.error %>
+        <p><%= messages.error %></p>
+    <% } else if(respon !='') { %>
+        <p><%= respon %></p>
     <% } %>
-    <p><%= respon %> </p>
     <a href="<%= baseUrl %>/daftar">Daftar</a>
 </body>
 </html>

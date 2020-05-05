@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const { init, checknotAuth } = require('../utils/passport-api');
 const { Auth: db } = require('../data');
 const { Captcha, checkCaptcha } = require('../utils/captcha');
-const captcha = new Captcha({ len: 10, field: 'captcha' });
+const captcha = new Captcha({ len: 4, field: 'captcha' });
  
 init(passport, db);
 
@@ -29,9 +29,8 @@ router.delete('/logout', (req, res) => {
 
 router.post('/daftar', checknotAuth, checkCaptcha, async (req, res) => {
 	try {
-		const { nama, pw, captcha } = req.body;
-		const isUserExist = async nama => await db.findOne({ nama }) != null ? true : false
-		console.log(captcha)
+		const { nama, pw } = req.body;
+		const isUserExist = async nama => await db.findOne({ nama }) != null ? true : false;
 		if (await isUserExist(nama)) {
 			req.flash('respon', 'Email telah terdaftar!');
 			return res.redirect(req.baseUrl + '/daftar');
