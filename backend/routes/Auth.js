@@ -2,8 +2,9 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const logg = []
 
-const { init, checknotAuth } = require('../utils/passport-api');
+const { init, checknotAuth, isLogin } = require('../utils/passport-api');
 const { Auth: db } = require('../data');
 const { Captcha, checkCaptcha } = require('../utils/captcha');
 const captcha = new Captcha({ len: 4, field: 'captcha' });
@@ -33,13 +34,14 @@ router.post(
   checknotAuth,
   checkCaptcha,
   passport.authenticate("local", {
-    successRedirect: "/message",
     failureRedirect: "/auth/masuk",
     failureFlash: true,
-  })
+  }),
+  logged
 );
 
 router.delete("/logout", (req, res) => {
+  logg.splice(logg.indexOf(req.sessionID), 1);
   req.session.destroy((e) => res.redirect("/"));
   req.logOut();
 });
@@ -65,5 +67,22 @@ router.post("/daftar", checknotAuth, checkCaptcha, async (req, res) => {
     return res.redirect(req.baseUrl + "/daftar");
   }
 });
+
+async function logged(req, res) {
+  const { nama } = req.body;
+  for(i of logg) {
+    if(nama === i.n) {
+      if(req.sessionID !== i.id) {
+        req.flash('respon', 'Siswa sudah masuk');
+        res.redirect('/Auth/masuk');
+        return req.logOut(); 
+      } else {
+        logg.splice(logg.indexOf(i.n), 1);
+      }
+    } 
+  }
+  logg.push({ n: nama, i: req.sessionID });
+  return res.redirect('/message');
+}
 
 module.exports = router;

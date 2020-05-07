@@ -9,7 +9,6 @@ const methodOverride = require("method-override");
 const { resolve } = require("path");
 const noCache = require("nocache");
 const session = require("express-session");
-const cookie = require("cookie-parser");
 
 require("dotenv").config();
 
@@ -45,7 +44,6 @@ app.use(noCache());
 app.use(helmet.referrerPolicy({ policy: ["no-referrer", "same-origin"] }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookie(secret));
 app.use(session(sess));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -66,4 +64,4 @@ app.use((err, req, res, next) => {
   res.render("error");
 });
 
-server.listen(port, (_) => console.log(`Listening on port ${port}`));
+server.listen(port, _ => console.log(`Listening on port ${port}`));
